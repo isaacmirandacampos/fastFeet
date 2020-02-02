@@ -1,12 +1,13 @@
 import Sequelize from 'sequelize';
 
 import User from '../app/models/User';
+import Recipient from '../app/models/Recipient';
 
 import databaseConfig from '../config/database';
 
 require('dotenv/config');
 
-const models = [User];
+const models = [User, Recipient];
 
 class Database {
   constructor() {
