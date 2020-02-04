@@ -15,13 +15,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: { model: 'files', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
