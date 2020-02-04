@@ -16,12 +16,6 @@ const uploads = multer(multerConfig);
 routes.post('/register', UserController.store);
 routes.post('/sessions', SessionController.store);
 
-routes.post(
-  '/shippers/:id/files',
-  uploads.single('file'),
-  FileController.store
-);
-
 routes.use(authMiddlewares);
 routes.get('/recipients', RecipientController.index);
 routes.post('/recipients', RecipientController.store);
@@ -32,5 +26,11 @@ routes.get('/shippers', ShipperController.index);
 routes.post('/shippers', ShipperController.store);
 routes.put('/shippers/:id', ShipperController.update);
 routes.delete('/shippers/:id', ShipperController.delete);
+
+routes.post(
+  '/shippers/:id/files',
+  uploads.single('file'),
+  FileController.store
+);
 
 export default routes;
