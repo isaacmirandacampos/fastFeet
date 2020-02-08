@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import ShipperController from './app/controllers/ShipperController';
 import FileController from './app/controllers/FileController';
+import OrderController from './app/controllers/OrderController';
 
 import authMiddlewares from './app/middlewares/auth';
 
@@ -32,5 +33,9 @@ routes.post(
   uploads.single('file'),
   FileController.store
 );
+
+routes.get('/orders', OrderController.index);
+routes.post('/orders', OrderController.store);
+routes.put('/orders/:id/files', uploads.single('file'), OrderController.update);
 
 export default routes;

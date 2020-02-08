@@ -4,12 +4,13 @@ import User from '../app/models/User';
 import Recipient from '../app/models/Recipient';
 import Shipper from '../app/models/Shipper';
 import File from '../app/models/File';
+import Order from '../app/models/Order';
 
 import databaseConfig from '../config/database';
 
 require('dotenv/config');
 
-const models = [User, Recipient, File, Shipper];
+const models = [User, Recipient, Shipper, File, Order];
 
 class Database {
   constructor() {
