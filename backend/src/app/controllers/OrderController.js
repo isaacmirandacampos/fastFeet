@@ -8,7 +8,7 @@ import File from '../models/File';
 class OrderController {
   async index(req, res) {
     const orders = await Order.findAll({
-      attributes: ['id', 'product', 'canceladAt', 'start_date', 'end_date'],
+      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
       include: [
         {
           model: Recipient,
@@ -24,6 +24,7 @@ class OrderController {
           ],
         },
         { model: Shipper, as: 'shipper', attributes: ['id', 'name', 'email'] },
+        { model: File, as: 'file', attributes: ['id', 'name', 'path', 'url'] },
       ],
     });
     return res.json(orders);
@@ -63,7 +64,7 @@ class OrderController {
   async update(req, res) {
     const { id } = req.params;
 
-    const oldOrder = Order.findByPk(id);
+    const oldOrder = await Order.findByPk(id);
 
     if (!oldOrder) {
       return res.status(400).json({ error: 'order not exist' });
@@ -78,6 +79,20 @@ class OrderController {
     const newOrder = await oldOrder.save();
 
     return res.json(newOrder);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const order = await Order.findByPk(id);
+
+    if (!order) {
+      return res.status(400).json({ error: 'Order not exist' });
+    }
+
+    await order.destroy();
+
+    return res.json({ Message: 'Success' });
   }
 }
 
