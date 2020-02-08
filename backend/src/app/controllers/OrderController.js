@@ -62,21 +62,25 @@ class OrderController {
   }
 
   async update(req, res) {
+    const schema = Yup.object().shape({
+      recipient_id: Yup.number(),
+      deliveryman_id: Yup.number(),
+      product: Yup.string(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validations fails' });
+    }
+
     const { id } = req.params;
 
     const oldOrder = await Order.findByPk(id);
 
     if (!oldOrder) {
-      return res.status(400).json({ error: 'order not exist' });
+      return res.status(400).json({ error: 'not found order with this id' });
     }
 
-    const { originalname: name, filename: path } = req.file;
-
-    const file = await File.create({ name, path });
-
-    oldOrder.signature_id = file.id;
-
-    const newOrder = await oldOrder.save();
+    const newOrder = await oldOrder.update(req.body);
 
     return res.json(newOrder);
   }

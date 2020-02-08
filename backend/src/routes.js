@@ -36,7 +36,7 @@ routes.post(
 
 routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
-routes.put('/orders/:id/files', uploads.single('file'), OrderController.update);
+routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
 
 export default routes;
