@@ -5,12 +5,13 @@ import Recipient from '../app/models/Recipient';
 import Shipper from '../app/models/Shipper';
 import File from '../app/models/File';
 import Order from '../app/models/Order';
+import DeliveryProblem from '../app/models/DeliveryProblem';
 
 import databaseConfig from '../config/database';
 
 require('dotenv/config');
 
-const models = [User, Recipient, Shipper, File, Order];
+const models = [User, Recipient, Shipper, File, Order, DeliveryProblem];
 
 class Database {
   constructor() {
