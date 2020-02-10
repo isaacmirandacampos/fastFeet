@@ -71,11 +71,13 @@ class DeliveryProblemController {
     const deliveryProblem = await DeliveryProblem.findByPk(deliveryId);
 
     if (!deliveryProblem) {
-      return res.status(400).json({ error: 'Delivery Problem not exist' });
+      return res.status(400).json({ error: 'Delivery not exist' });
     }
 
-    deliveryProblem.destroy();
-    return res.json({ message: 'Success' });
+    const order = await Order.findByPk(deliveryProblem.delivery_id);
+    order.canceled_at = new Date();
+    order.save();
+    return res.json(order);
   }
 }
 

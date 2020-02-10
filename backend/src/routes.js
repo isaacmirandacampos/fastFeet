@@ -24,7 +24,7 @@ routes.get('/deliveryman/:id/deliveries', DeliveryOrderController.index);
 routes.get('/delivery/:deliveryId/problems', DeliveryProblemController.index);
 routes.post('/delivery/:deliveryId/problems', DeliveryProblemController.store);
 routes.delete(
-  '/delivery/:deliveryId/problems',
+  '/problem/:deliveryId/cancel-delivery',
   DeliveryProblemController.delete
 );
 
