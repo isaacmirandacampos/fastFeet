@@ -27,7 +27,7 @@ class Order extends Model {
     });
     this.belongsTo(models.File, {
       foreignKey: 'signature_id',
-      as: 'file',
+      as: 'signature',
     });
   }
 }

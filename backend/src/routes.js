@@ -21,7 +21,12 @@ routes.post('/sessions', SessionController.store);
 
 routes.get('/deliveryman/:id/deliveries', DeliveryOrderController.index);
 
-routes.get('/delivery/:deliveryId/problems', DeliveryProblemController.store);
+routes.get('/delivery/:deliveryId/problems', DeliveryProblemController.index);
+routes.post('/delivery/:deliveryId/problems', DeliveryProblemController.store);
+routes.delete(
+  '/delivery/:deliveryId/problems',
+  DeliveryProblemController.delete
+);
 
 routes.use(authMiddlewares);
 routes.get('/recipients', RecipientController.index);

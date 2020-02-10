@@ -10,12 +10,13 @@ class DeliveryProblem extends Model {
         sequelize,
       }
     );
+    return this;
   }
 
   static associate(models) {
     this.belongsTo(models.Order, {
       foreignKey: 'delivery_id',
-      as: 'orders',
+      as: 'order',
     });
   }
 }
